@@ -362,3 +362,124 @@ footer {
     display: block;
     margin: 20px auto;
 }
+
+/* =========================
+   PHONE VERSION
+========================= */
+
+.menu-btn{
+    display:none;
+}
+
+/* PHONE */
+@media screen and (max-width:768px){
+
+    /* NAVBAR */
+
+    .menu-btn{
+        display:block;
+        background:none;
+        border:none;
+        color:white;
+        font-size:35px;
+        cursor:pointer;
+    }
+
+    .nav-links{
+        position:fixed;
+        top:0;
+        left:-250px;
+
+        width:250px;
+        height:100vh;
+
+        background:#222;
+
+        display:flex;
+        flex-direction:column;
+
+        gap:25px;
+
+        padding-top:80px;
+
+        transition:0.4s;
+
+        z-index:9999;
+    }
+
+    .nav-links.active{
+        left:0;
+    }
+
+    /* SMALLER LOGO */
+
+    .logo{
+        height:30px;
+    }
+
+    /* SMALLER TEXT */
+
+    h1{
+        font-size:28px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    p{
+        font-size:15px;
+    }
+
+    /* HERO */
+
+    .hero{
+        height:350px;
+        padding:20px;
+    }
+
+    /* CARDS BELOW EACH OTHER */
+
+    .cards{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .card{
+        width:90%;
+    }
+
+    /* GALLERY STACKED */
+
+    .gallery-track{
+        flex-direction:column;
+        align-items:center;
+        animation:none;
+    }
+
+    .gallery-track img{
+        width:90%;
+        height:auto;
+    }
+
+    /* POPUPS SMALLER */
+
+    .popup-content{
+        width:90%;
+        max-width:350px;
+    }
+
+    /* BUTTONS */
+
+    .btn{
+        padding:10px 20px;
+        font-size:15px;
+    }
+
+    /* MASCOT */
+
+    #mascot{
+        width:70px;
+    }
+
+}
