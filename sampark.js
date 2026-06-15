@@ -203,3 +203,11 @@ function paymentDone() {
         "🎉 Donation Received! 🎉<br><br>🙏 Thank you for supporting Sampark 💛";
 
 }
+
+function toggleMenu() {
+
+    document
+        .querySelector(".nav-links")
+        .classList.toggle("active");
+
+}
