@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Sampark Dashboard</title>
+
+    </head>
+
+<style>
+    body{
+    margin:0;
+    background:#0b1020;
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:Arial,sans-serif;
+}
+
+.dashboard-title{
+    position:absolute;
+    top:25px;
+    left:30px;
+
+    color:white;
+    font-size:35px;
+}
+
+.orbit-wrapper{
+    position:relative;
+    width:700px;
+    height:700px;
+}
+
+.center-logo{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    z-index:100;
+
+    box-shadow:0 0 40px gold;
+}
+
+.center-logo img{
+    width:100%;
+    height:100%;
+}
+
+.orbit{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border:2px solid rgba(255,255,255,.1);
+
+    border-radius:50%;
+}
+
+.icon{
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    background:#1c2333;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:35px;
+
+    cursor:pointer;
+
+    box-shadow:0 0 15px rgba(255,255,255,.1);
+
+    transition:.5s;
+}
+
+.selected{
+
+    background:white;
+
+    box-shadow:
+    0 0 25px white,
+    0 0 50px white;
+}
+
+.info-box{
+
+    position:absolute;
+
+    top:70px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:#1c2333;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    display:none;
+
+    text-align:center;
+
+    z-index:999;
+}
+
+#openBtn{
+
+    margin-top:10px;
+
+    background:gold;
+
+    border:none;
+
+    padding:10px 20px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+    </style>
+
+    <body>
+
+        <h1 class="dashboard-title">Sampark Dashboard</h1>
+        
+        <div class="orbit-wrapper">
+        
+            <div class="center-logo">
+                <img src="Sampark logo.png">
+            </div>
+        
+            <div class="orbit" id="orbit">
+        
+                <div class="icon" data-angle="0" onclick="selectItem(this,'About','about.html')">🌟</div>
+        
+                <div class="icon" data-angle="45" onclick="selectItem(this,'Gallery','gallery.html')">📸</div>
+        
+                <div class="icon" data-angle="90" onclick="selectItem(this,'Donate','donate.html')">❤️</div>
+        
+                <div class="icon" data-angle="135" onclick="selectItem(this,'Volunteer','volunteer.html')">🤝</div>
+        
+                <div class="icon" data-angle="180" onclick="selectItem(this,'Help','help.html')">🆘</div>
+        
+                <div class="icon" data-angle="225" onclick="selectItem(this,'Contact','contact.html')">📞</div>
+        
+                <div class="icon" data-angle="270" onclick="selectItem(this,'News','news.html')">📰</div>
+        
+                <div class="icon" data-angle="315" onclick="selectItem(this,'Programs','programs.html')">🎓</div>
+        
+            </div>
+        
+            <div class="info-box" id="infoBox">
+        
+                <h2 id="title"></h2>
+        
+                <button id="openBtn">
+                    Open Page
+                </button>
+        
+            </div>
+        
+        </div>
+
+        <script>
+
+            const orbit = document.getElementById("orbit");
+
+            const radius = 300;
+
+            let rotation = 0;
+
+            let autoRotate = true;
+
+            const icons = document.querySelectorAll(".icon");
+
+            icons.forEach(icon => {
+
+                const angle = parseInt(icon.dataset.angle);
+
+                placeIcon(icon, angle);
+
+            });
+
+            function placeIcon(icon, angle) {
+
+                const x = Math.cos(angle * Math.PI / 180) * radius;
+                const y = Math.sin(angle * Math.PI / 180) * radius;
+
+                icon.style.left = (350 + x - 45) + "px";
+                icon.style.top = (350 + y - 45) + "px";
+
+            }
+
+            setInterval(() => {
+
+                if (autoRotate) {
+
+                    rotation += 0.2;
+
+                    updateOrbit();
+
+                }
+
+            }, 20);
+
+            function updateOrbit() {
+
+                icons.forEach(icon => {
+
+                    let angle = parseFloat(icon.dataset.angle);
+
+                    angle += rotation;
+
+                    const x = Math.cos(angle * Math.PI / 180) * radius;
+                    const y = Math.sin(angle * Math.PI / 180) * radius;
+
+                    icon.style.left = (350 + x - 45) + "px";
+                    icon.style.top = (350 + y - 45) + "px";
+
+                    icon.style.transform =
+                        "translate(-0%, -0%) rotate(" + (-rotation) + "deg)";
+
+                });
+
+            }
+
+            function selectItem(element, title, page) {
+
+                    autoRotate = false;
+
+                    icons.forEach(icon => {
+                        icon.classList.remove("selected");
+                    });
+
+                    element.classList.add("selected");
+
+                    const currentAngle =
+                        parseFloat(element.dataset.angle) + rotation;
+
+                    const targetRotation =
+                        270 - currentAngle;
+
+                    rotation += targetRotation;
+
+                    updateOrbit();
+
+                    document.getElementById("infoBox").style.display = "block";
+
+                    document.getElementById("title").innerText = title;
+
+                    document.getElementById("openBtn").onclick = function () {
+
+                        window.location.href = page;
+
+                    };
+
+                }
+        </script>
+
+        </body>
+
+        </html>
