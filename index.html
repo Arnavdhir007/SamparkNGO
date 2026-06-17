@@ -21,13 +21,47 @@
     font-family:Arial,sans-serif;
 }
 
-.dashboard-title{
+.stars {
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background-image:
+    radial-gradient(white 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    opacity:.15;
+
+    pointer-events:none;
+
+}
+
+.dashboard-title {
+
     position:absolute;
+
     top:25px;
     left:30px;
 
+    font-size:42px;
+
+    font-weight:900;
+
     color:white;
-    font-size:35px;
+
+    text-shadow:
+    0 0 10px gold,
+    0 0 20px gold,
+    0 0 40px gold;
+
+    z-index:999;
+
 }
 
 .orbit-wrapper{
@@ -36,7 +70,7 @@
     height:700px;
 }
 
-.center-logo{
+.center-logo {
 
     position:absolute;
 
@@ -45,16 +79,23 @@
 
     transform:translate(-50%,-50%);
 
-    width:180px;
-    height:180px;
+    width:160px;
+    height:160px;
 
     border-radius:50%;
 
     overflow:hidden;
 
+    background:white;
+
     z-index:100;
 
-    box-shadow:0 0 40px gold;
+    box-shadow:
+    0 0 20px gold,
+    0 0 40px gold,
+    0 0 80px gold,
+    0 0 120px rgba(255,215,0,.5);
+
 }
 
 .center-logo img{
@@ -98,6 +139,16 @@
     transition:.5s;
 }
 
+.icon:hover {
+
+    background:#2b3550;
+
+    box-shadow:
+    0 0 20px gold,
+    0 0 40px gold;
+
+}
+    
 .selected{
 
     background:white;
@@ -105,6 +156,18 @@
     box-shadow:
     0 0 25px white,
     0 0 50px white;
+}
+
+    .selected-icon {
+
+    background:white !important;
+
+    color:black;
+
+    box-shadow:
+    0 0 25px white,
+    0 0 50px white;
+
 }
 
 .info-box{
@@ -131,6 +194,13 @@
     z-index:999;
 }
 
+.info-box {
+
+    box-shadow:
+    0 0 20px rgba(255,215,0,.25);
+
+}
+
 #openBtn{
 
     margin-top:10px;
@@ -149,6 +219,8 @@
 
     <body>
 
+<div class="stars"></div>
+        
         <h1 class="dashboard-title">Sampark Dashboard</h1>
         
         <div class="orbit-wrapper">
